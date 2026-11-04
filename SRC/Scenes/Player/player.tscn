@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c4nckhb1xykmr"]
+
+[ext_resource type="Script" uid="uid://ckr0wf0w8yhg1" path="res://SRC/Scenes/Player/player_controller.gd" id="1_twnku"]
+[ext_resource type="PackedScene" uid="uid://cscvedov7udpv" path="res://Addons/Godot/AnimationLibrary_Godot_Standard.glb" id="2_wq4x3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hk3cl"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1509667205]
+script = ExtResource("1_twnku")
+target_distance = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=957264619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hk3cl")
+
+[node name="AnimationLibrary_Godot_Standard" parent="." unique_id=1624515923 instance=ExtResource("2_wq4x3")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1006775410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=684394251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="GroundRay" type="RayCast3D" parent="." unique_id=1370336841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -1.5, 0)

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cbdkjdnr5gree"]
+
+[ext_resource type="Script" uid="uid://h0woucuxlx24" path="res://SRC/Scenes/TopDownCamera/top_down_camera.gd" id="1_w3u7s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx0c2"]
+shading_mode = 0
+albedo_color = Color(0.954272, 0.00023685143, 0.2536175, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hk3cl"]
+material = SubResource("StandardMaterial3D_gx0c2")
+radius = 0.1
+height = 0.2
+
+[node name="TopDownCamera" type="Node3D" unique_id=2101747362]
+script = ExtResource("1_w3u7s")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=388737420]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=633908075]
+target_position = Vector3(0, -50, 0)
+
+[node name="DebugPoint" type="MeshInstance3D" parent="." unique_id=1409053525]
+top_level = true
+mesh = SubResource("SphereMesh_hk3cl")

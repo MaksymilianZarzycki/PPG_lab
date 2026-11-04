@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ckx12tnqwbx8x"]
+
+[ext_resource type="PackedScene" uid="uid://c4nckhb1xykmr" path="res://SRC/Scenes/Player/player.tscn" id="1_g5lk4"]
+[ext_resource type="PackedScene" uid="uid://cbdkjdnr5gree" path="res://SRC/Scenes/TopDownCamera/top_down_camera.tscn" id="2_iv3tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hk3cl"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5lk4"]
+albedo_color = Color(0, 0.5312007, 0.41992754, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gx0c2"]
+material = SubResource("StandardMaterial3D_g5lk4")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iv3tw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d07cm"]
+
+[node name="Lab1" type="Node3D" unique_id=1368196129]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1365754991]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1754242112]
+shape = SubResource("BoxShape3D_hk3cl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=882233770]
+mesh = SubResource("BoxMesh_gx0c2")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=861005523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90532064, -7.4362144)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=198642308]
+shape = SubResource("BoxShape3D_iv3tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=663433360]
+mesh = SubResource("BoxMesh_d07cm")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1824380377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.118061, 2.5493188, -7.4362144)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1526266927]
+shape = SubResource("BoxShape3D_iv3tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1720444839]
+mesh = SubResource("BoxMesh_d07cm")
+
+[node name="Player" parent="." unique_id=1509667205 instance=ExtResource("1_g5lk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24119377, 1.5, 0.441494)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1597884649]
+transform = Transform3D(0.83871216, -0.4749067, 0.26650617, 2.2776419e-08, 0.4893838, 0.8720685, -0.544575, -0.7314145, 0.41045216, 38.127304, 38.005787, 30.261112)
+shadow_enabled = true
+
+[node name="TopDownCamera" parent="." unique_id=2101747362 node_paths=PackedStringArray("controlled_character") instance=ExtResource("2_iv3tw")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 10, 0)
+controlled_character = NodePath("../Player")
+
+[connection signal="rts_mode_changed" from="TopDownCamera" to="Player" method="on_rts_mode_change"]
+[connection signal="rts_target_set" from="TopDownCamera" to="Player" method="on_rts_target_set"]
