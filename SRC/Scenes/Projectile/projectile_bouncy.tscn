@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://64uc5bwin2c3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hk3cl"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx0c2"]
+shading_mode = 0
+albedo_color = Color(0.9524736, 2.2140146e-06, 0.5602432, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hk3cl"]
+material = SubResource("StandardMaterial3D_gx0c2")
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 2
+
+[node name="Projectile_Bouncy" type="RigidBody3D" unique_id=314158196]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1732370789]
+shape = SubResource("SphereShape3D_hk3cl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=708425902]
+mesh = SubResource("SphereMesh_hk3cl")

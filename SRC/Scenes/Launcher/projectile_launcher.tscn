@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d0y6frxfxhhvn"]
+
+[ext_resource type="Script" uid="uid://bnw3r8o2oig72" path="res://SRC/Scenes/Launcher/projectile_launcher.gd" id="1_k7ntr"]
+
+[node name="ProjectileLauncher" type="Node3D" unique_id=2078931900 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("1_k7ntr")
+spawn_point = NodePath(".")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=2053300013]
+one_shot = true

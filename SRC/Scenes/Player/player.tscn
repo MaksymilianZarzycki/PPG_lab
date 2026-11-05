@@ -2,11 +2,21 @@
 
 [ext_resource type="Script" uid="uid://ckr0wf0w8yhg1" path="res://SRC/Scenes/Player/player_controller.gd" id="1_twnku"]
 [ext_resource type="PackedScene" uid="uid://cscvedov7udpv" path="res://Addons/Godot/AnimationLibrary_Godot_Standard.glb" id="2_wq4x3"]
+[ext_resource type="PackedScene" uid="uid://d0y6frxfxhhvn" path="res://SRC/Scenes/Launcher/projectile_launcher.tscn" id="3_hxv1s"]
+[ext_resource type="PackedScene" uid="uid://cg68kl5xvwq5b" path="res://SRC/Scenes/Projectile/projectile.tscn" id="4_6xn0s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hk3cl"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1509667205]
+[sub_resource type="CylinderMesh" id="CylinderMesh_hk3cl"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[node name="Player" type="CharacterBody3D" unique_id=1509667205 node_paths=PackedStringArray("weapons")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_twnku")
+weapons = [NodePath("ProjectileLauncher")]
 target_distance = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=957264619]
@@ -17,7 +27,7 @@ shape = SubResource("CapsuleShape3D_hk3cl")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1006775410]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5683429, 1.9048343, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=684394251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
@@ -25,3 +35,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 [node name="GroundRay" type="RayCast3D" parent="." unique_id=1370336841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, -1.5, 0)
+
+[node name="ProjectileLauncher" parent="." unique_id=2078931900 node_paths=PackedStringArray("parent") instance=ExtResource("3_hxv1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17819875, 1.6021976, 0)
+visible = false
+projectile = ExtResource("4_6xn0s")
+parent = NodePath("..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ProjectileLauncher" unique_id=212024486]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_hk3cl")

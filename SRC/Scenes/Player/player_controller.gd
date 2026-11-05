@@ -4,6 +4,9 @@ extends CharacterBody3D
 @export var speed = 5.0
 @export var jump_velocity = 4.5
 @export var mouse_sensitivity = 0.01
+
+@export var weapons: Array[ProjectileLauncher]
+var current_weapon = 0
 #@export_group("Nodes")
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
@@ -13,7 +16,6 @@ extends CharacterBody3D
 
 @onready var model: Node3D = $AnimationLibrary_Godot_Standard
 @onready var animation_player: AnimationPlayer = $AnimationLibrary_Godot_Standard/AnimationPlayer
-
 
 var original_collider_height : float;
 
@@ -34,6 +36,12 @@ func _physics_process(delta: float) -> void:
 		rts_movement(delta)
 	else:
 		movement(delta)
+		if Input.is_action_pressed("aim"):
+			aim()
+		if Input.is_action_just_released("aim"):
+			for weapon in weapons:
+				weapon.visible = false
+		
 	move_and_slide()
 	
 
@@ -103,6 +111,11 @@ func rts_movement(delta:float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 		animation_player.play("Idle")
+
+func aim():
+	weapons[current_weapon].visible = true
+	if Input.is_action_pressed("shoot"):
+			weapons[current_weapon].shoot(-camera_3d.global_basis.z)
 
 func on_rts_mode_change(value:bool):
 	rts_mode = value
